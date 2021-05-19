@@ -10,7 +10,7 @@ services:
         # network_mode: host
     
     metabase:
-      image: metabase_with_clh
+      image: metabase_with_clh_oracle:1.0.0
       restart: always
       ports:
         - 3002:3000
