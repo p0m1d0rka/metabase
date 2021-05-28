@@ -1,0 +1,35 @@
+version: "3"
+services:
+    postgres:
+        image: postgres:13.2
+        restart: always
+        volumes:
+            - ./pgdb/:/var/lib/postgresql/data
+        env_file:
+            -  .env
+        # network_mode: host
+    
+    metabase:
+        image: metabase_test:1.0.0
+        restart: always
+        # ports:
+        #     - 3003:3000
+        env_file: 
+            - .env
+        volumes: 
+            - ./csvs/:/metabase_data/csvs
+    nginx: 
+        image: nginx:1.21
+        restart: always
+        ports:
+            # http
+            - 3003:3003
+            # https
+            - 3004:3004
+        volumes: 
+            - ./nginx.conf:/etc/nginx/nginx.conf
+            - ./certs:/etc/certs
+
+
+        
+      
